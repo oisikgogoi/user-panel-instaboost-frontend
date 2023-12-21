@@ -13,10 +13,6 @@ function Login() {
 
   const navigate = useNavigate()
 
-  useEffect(()=>{
-    if(localStorage.getItem('accessToken'))  navigate('/data')
-  })
-
   const loginHandler = async (event) =>{
     event.preventDefault()
 
@@ -27,7 +23,7 @@ function Login() {
      
         localStorage.setItem("accessToken", response.data.accesstoken)
         toast.success("logged in successfully")
-        navigate('/data') 
+        navigate('/') 
     }
     catch(err){
       toast.error(err.response.data.msg)
@@ -57,7 +53,6 @@ function Login() {
               }
               }} >{ (loading)?<LoadingScreen/> : "log in"}</button>
 
-            <p>Dont have an account ? <Link to='/signup'>sign up</Link></p>
         </Main>
     </Wrap>
   )

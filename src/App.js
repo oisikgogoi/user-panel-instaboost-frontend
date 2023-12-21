@@ -7,10 +7,9 @@ function App() {
   return (
       <>
       <Routes>
-        <Route exact path='/' element={<Login />} />
-        <Route exact path='/data' element={<MainPage />} />
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/' element={<MainPage />} />
       </Routes> 
-
       <Toaster />
      </>
 

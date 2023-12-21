@@ -14,7 +14,6 @@ function MainPage() {
       setError('no access token');
       return;
     }
-
     const fetchPrivateData = async () => {
       const config = {
         headers: {
@@ -30,25 +29,26 @@ function MainPage() {
           setData(newData);
           console.log(newData)
 
-
-
-
-
       } catch (err) {
           setError(err.message);
           console.log(err.message)
-
       }
     };
-
     fetchPrivateData();
   }, []);
+
+
+
+  const handleLogout = ()=>{
+    localStorage.removeItem('accessToken')
+    window.location.reload()
+  }
 
   return (
     <>
       {error ? (
         <p className='main-page-error-container'>
-          Unauthorized <Link to={'/'}>login</Link>
+          Unauthorized <Link to={'/login'}>login</Link>
         </p>
       ) : (
         <>
@@ -56,7 +56,10 @@ function MainPage() {
             <h3 className='logo'>
               user panel <FontAwesomeIcon className='logo-icon' icon={faPencil} />
             </h3>
+            <div className='right'>
+            <button onClick={()=>{handleLogout()}}>log out</button>
             <span>Total data : {data.length}</span>
+            </div>
           </NavBar>
 
           <Main>
@@ -85,12 +88,19 @@ const NavBar = styled.div`
     justify-content:space-between;
     padding:1rem;
     box-shadow:1px 1px 10px 3px rgba(173, 173, 173, 0.733);
-    position:fixed;
-    width:100vw;
+    width:100%;
     background:white;
 
-    span{
+    .right{
       margin-right:1rem;
+    }
+    button{
+      padding:.3rem 1rem ;
+      margin:0 1rem ;
+      background:red;
+      color:white;
+      border:none;
+      cursor:pointer;
     }
 `
 
@@ -105,7 +115,8 @@ justify-content:center;
 flex-direction:column;
 div{
   width:min(400px, 100%);
-  background:rgba(0, 0, 255, 0.106) ;
+  background:rgba(0, 34, 255, 0.072);
+
   margin:1rem 0;
   display:flex;
   align-items:left;
@@ -116,6 +127,7 @@ div{
 div p{
   margin:.5rem 0;
 }
+
 
 `
 
